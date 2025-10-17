@@ -84,7 +84,7 @@ function createHouse(x, z) {
   let house = document.createElement("a-entity");
 
   let base = document.createElement("a-box");
-  base.setAttribute("color", "yellow");
+  base.setAttribute("color", "white");
   base.setAttribute("position", "0 0.5 0");
   base.setAttribute("width", "1");
   base.setAttribute("height", "1");
@@ -92,7 +92,7 @@ function createHouse(x, z) {
   house.append(base);
 
   let roof = document.createElement("a-cone");
-  roof.setAttribute("color", "red");
+  roof.setAttribute("color", "#ffd1d1");
   roof.setAttribute("position", "0 1.5 0");
   roof.setAttribute("radius", "0");
   roof.setAttribute("height", "1");
