@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded",function() {
   
   //Challenge 3: Change the <a-dodecahedron>'s position, radius and color
   dodecahedron.setAttribute("position","0 5 -5");
-  dodecahedron.setAttribute("radius","3");
+  dodecahedron.setAttribute("radius","2");
   dodecahedron.setAttribute("color","#ffcfeb");
 
   //Challenge 4: Add the <a-dodecahedron> to the scene

@@ -14,7 +14,7 @@
         <a-cylinder radius="0.1" rotation="90 0 0"></a-cylinder> 
       </a-entity>
 
-      <a-entity id="rocket" position="3 1 -4">
+  <a-entity id="rocket" position="3 1 -4" animation__rise="property: position; to: 3 12 -4; dur: 3000; dir: alternate; loop: true; easing: easeOutCubic">
       <a-cone radius-top="0" radius-bottom="0.5" height="1" color="red" position="0 0 -2"></a-cone>
       <a-cylinder radius="0.5" height="2" color="gray" position="0 -1.5 -2"></a-cylinder>
       <a-cone radius-top="0" radius-bottom="0.25" height="2" color="orange" position="0 -3.5 -2" rotation="-180 0 0"></a-cone>

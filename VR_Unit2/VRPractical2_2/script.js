@@ -57,6 +57,30 @@ window.addEventListener("DOMContentLoaded",function() {
         console.warn('No #sun entity found to animate');
     }
 
+    // ensure we have lights to make the fade visible
+    try {
+        if (scene && sun) {
+            if (!scene.querySelector('#sunLight')) {
+                const sunLight = document.createElement('a-entity');
+                sunLight.setAttribute('id', 'sunLight');
+                sunLight.setAttribute('light', { type: 'directional', intensity: 0, color: '#ffffff' });
+                sunLight.setAttribute('position', '0 8 -10');
+                scene.appendChild(sunLight);
+            }
+            if (!scene.querySelector('#ambientLight')) {
+                const ambient = document.createElement('a-entity');
+                ambient.setAttribute('id', 'ambientLight');
+                ambient.setAttribute('light', { type: 'ambient', intensity: 0.0, color: '#ffffff' });
+                scene.appendChild(ambient);
+            }
+            // store quick refs
+            sun._light = scene.querySelector('#sunLight');
+            sun._ambient = scene.querySelector('#ambientLight');
+        }
+    } catch (e) {
+        console.warn('Could not create scene lights for sun fade:', e);
+    }
+
     const DUDE_GROW_SPEED = 0.01;
     const DUDE_MIN_SCALE = 1.0;
     const DUDE_MAX_SCALE = 2.0;
@@ -76,6 +100,8 @@ window.addEventListener("DOMContentLoaded",function() {
 })
 
 function loop(){
+    // basic guard: ensure the rotation target still exists
+    if (!pokemonball) return;
     pokemonball.a += pokemonball.da;           
     pokemonball.setAttribute("rotation",{x:0, y:pokemonball.a, z:0});
   
@@ -89,7 +115,8 @@ function loop(){
         car.setAttribute('position', { x: car._pos.x, y: car._pos.y, z: car._pos.z });
     }
 
-    if (rocket && rocket._pos) {
+    // Only drive the rocket with JS if it doesn't already have an animation attribute
+    if (rocket && rocket._pos && !rocket.hasAttribute('animation') && !rocket.hasAttribute('animation__rise')) {
         rocket._pos.y += rocket._vy;
         if (rocket._pos.y >= rocket._maxY) {
             rocket._pos.y = rocket._startY;
