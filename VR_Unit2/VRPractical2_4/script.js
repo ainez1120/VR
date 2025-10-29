@@ -90,8 +90,18 @@
         dome.setAttribute('scale', '1 0.5 1');
         dome.setAttribute('material', 'color: #0000FF');
 
+        // ring under the UFO (gray), created as a geometry 'ring'
+        const ring = document.createElement('a-entity');
+        // radiusInner and radiusOuter set thickness and size of the ring
+        ring.setAttribute('geometry', 'primitive: ring; radiusInner: 0.6; radiusOuter: 1');
+        ring.setAttribute('material', 'color: #888888; side: double');
+        // rotate to lie flat on the XZ plane and slightly below the UFO
+        ring.setAttribute('rotation', '-90 0 0');
+        ring.setAttribute('position', '0 -0.2 0');
+
         this.entity.appendChild(body);
         this.entity.appendChild(dome);
+        this.entity.appendChild(ring);
         this.entity.setAttribute('position', `${x} ${y} ${z}`);
         scene.appendChild(this.entity);
       }
