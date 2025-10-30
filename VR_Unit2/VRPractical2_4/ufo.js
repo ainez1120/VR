@@ -11,7 +11,7 @@ class Ufo{
     let top = document.createElement("a-sphere");
     top.setAttribute("position", `0 0 -2`);
     top.setAttribute("radius", "1");
-    top.setAttribute("color", "yellow");
+    top.setAttribute("color", "#00ff33");
     this.obj.append(top);
     
     
@@ -22,16 +22,6 @@ class Ufo{
     body.setAttribute("scale", "2 0.75 2");
     this.obj.append(body);
     
-
-    let bottom = document.createElement("a-cone");
-    bottom.setAttribute("position", `0 -3.5 -2`);
-    bottom.setAttribute("rotation", "0 0 0");
-    bottom.setAttribute("radius-bottom", "2");
-    bottom.setAttribute("radius-top", "0.5");
-    bottom.setAttribute("height", "7");
-    bottom.setAttribute("color", "green");
-    bottom.setAttribute("opacity", "0.2");
-    this.obj.append(bottom);
 
     this.obj.setAttribute("position",{x:this.x, y:this.y, z:this.z});
     scene.append( this.obj )
