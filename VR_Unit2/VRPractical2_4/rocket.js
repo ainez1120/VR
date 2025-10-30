@@ -34,7 +34,6 @@ class Rocket{
     this.obj.setAttribute("position",{x:this.x, y:this.y, z:this.z});
     scene.append( this.obj )
   }
-
     launch(){
     this.a += this.da;
     this.obj.setAttribute("position", {x:this.x, y:this.a, z:this.z});

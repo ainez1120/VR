@@ -13,8 +13,7 @@ class Ufo{
     top.setAttribute("radius", "1");
     top.setAttribute("color", "#00ff33");
     this.obj.append(top);
-    
-    
+
     let body = document.createElement("a-sphere");
     body.setAttribute("position", `0 -1 -2`);
     body.setAttribute("radius", "1.2");
