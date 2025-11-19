@@ -1,46 +1,92 @@
-/* Note
-   Feel free to use classes from past classwork and practical activities.  You may also create new classes.  
-   If you wish to use objects from Unit 1, you can use cloneNode( ) to duplicate them.  As an added bonus you 
-   can also incorporate classes that have animations integrated into them. 
-*/
 
-/* Challenge 1
-   Add appropriate classes to use as objects in your maze.  Choose characters to represent these objects and 
-   position them in the maze.   In Challenge 3 and 4, you will generate the maze along with any other object 
-   you chose to put in the maze.  Get Creative!
-*/
 
 let maze = [
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
-  "----------------------",
+  "-----C--------------------",
+  "T-BBBBB--BBBBBBBBBBBBBBB-T",
+  "T-B----B-------B-------B-T",
+  "T-B--B-B-BBBB--B-BBBB--B-T",
+  "T-B-B----B----BB---B---B-T",
+  "T-B-BSBB-B-BBB----BBBB-B-T",
+  "T-B------B--B----B----BB-T",
+  "T-BBBBBB-BBBSBBBB-B-B--B-T",
+  "T-B------B-----B--B-B--B-T",
+  "T-B--BBB-B-BBBBB--B-B--B-T",
+  "T-B----B-B------B----B-B-T",
+  "T-B-BB-BBB---BB-BBBB-B-B-T",
+  "T-B-BB----B----B---B-----T",
+  "T-BBBBBBBBBBBBBBBBBBB-BBB-",
+  "TTTTTTTTTTTTTTTTTTT-G-TT-"
 ];
 
-/* Challenge 2
-   Add appropriate classes to use as objects in your map.  Choose characters to represent these objects and position them on the map.   In Challenge 5 and 6, you will generate the map using the character representation of the objects you chose to place in the world. Get Creative!
-*/
+// treasures removed per user request; no treasure entities will be created.
 
-let scene;
-
-window.addEventListener("DOMContentLoaded",function() {
-  scene = document.querySelector("a-scene");
-  for(let r = 0; r < maze.length; r++){
-    /* Challenge 3
-      Choose a technique to traverse the each character in the string.
-    */ 
-    /* Challenge 4
-       Make an appropriate decision based on the characters you chose to enter 
-       in the maze.  Create an instance of the corresponding object.
-    */
+window.addEventListener('DOMContentLoaded', function () {
+  const scene = document.querySelector('a-scene');
+  if (!scene) {
+    console.error('a-scene not found');
+    return;
   }
 
-})
+  class Block {
+    constructor(x, y, z) {
+      this.entity = document.createElement('a-box');
+      this.entity.setAttribute('position', `${x} ${y} ${z}`);
+      this.entity.setAttribute('depth', '1');
+      this.entity.setAttribute('height', '1');
+      this.entity.setAttribute('width', '1');
+      this.entity.setAttribute('color', '#7B7B7B');
+      scene.appendChild(this.entity);
+    }
+  }
+
+  class Tree {
+    constructor(x, y, z) {
+      this.entity = document.createElement('a-entity');
+
+      const trunk = document.createElement('a-cylinder');
+      trunk.setAttribute('radius', '0.4');
+      trunk.setAttribute('height', '2');
+      trunk.setAttribute('color', '#8B5A2B');
+      // Center trunk so its bottom rests on the ground when entity y is 0
+      trunk.setAttribute('position', '0 1 0');
+
+
+      const foliage = document.createElement('a-sphere');
+      foliage.setAttribute('radius', '1.2');
+      foliage.setAttribute('color', '#2E8B57');
+      foliage.setAttribute('position', '0 2.2 0');
+
+      this.entity.appendChild(trunk);
+      this.entity.appendChild(foliage);
+      // Position the whole tree so its base sits on the ground plane
+      this.entity.setAttribute('position', `${x} 0 ${z}`);
+      scene.appendChild(this.entity);
+    }
+  }
+
+
+  for (let r = 0; r < maze.length; r++) {
+    const row = maze[r];
+    for (let c = 0; c < row.length; c++) {
+      const ch = row[c];
+      const x = c - Math.floor(row.length / 2);
+      const z = -r + Math.floor(maze.length / 2);
+      const y = 0.5;
+
+      if (ch === 'B') {
+        new Block(x, y, z);
+      } else if (ch === 'T') {
+        new Tree(x, y, z);
+      } else if (ch === 'S') {
+        const start = document.createElement('a-cylinder');
+        start.setAttribute('position', `${x} ${0.25} ${z}`);
+        start.setAttribute('height', '0.1');
+        start.setAttribute('radius', '0.5');
+        start.setAttribute('color', '#00FF00');
+        scene.appendChild(start);
+      }
+    }
+  }
+
+
+});
