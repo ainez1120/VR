@@ -6,13 +6,14 @@ class Bullet{
     this.obj.setAttribute("position",{x:pos.x,y:pos.y,z:pos.z});
     scene.append(this.obj);
     
-    let theta = camera.object3D.rotation.y + Math.PI;
-    let phi = camera.object3D.rotation.x;
-    let v = 0.1
-    let v_xz = v * Math.cos(phi);
-    this.dz = v_xz * Math.cos(theta);
-    this.dx = v_xz * Math.sin(theta);
-    this.dy = v * Math.sin(phi);
+
+    let direction = new THREE.Vector3(0, 0, -1);
+    direction.applyQuaternion(camera.object3D.quaternion);
+    
+    let speed = 0.2;
+    this.dx = direction.x * speed;
+    this.dy = direction.y * speed;
+    this.dz = direction.z * speed;
   }
   fire(){
 
@@ -20,6 +21,6 @@ class Bullet{
     this.obj.object3D.position.y += this.dy;
     this.obj.object3D.position.z += this.dz; 
 
-    //this.obj.object3D.rotation.y = this.theta - Math.PI/2;
+   
   }
 }
