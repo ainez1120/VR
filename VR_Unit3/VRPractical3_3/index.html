@@ -4,18 +4,7 @@
     <script src="bullet.js"></script>
     <script src="script.js"></script>
     <style>
-      #aimCircle {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 20px;
-        height: 20px;
-        border: 2px solid red;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-      }
+
       #score {
         position: fixed;
         top: 20px;
@@ -73,8 +62,9 @@
       <a-tetrahedron src="#rock" repeat="6 6" radius="5" position="20 0 10"></a-tetrahedron>
       <a-tetrahedron src="#rock" repeat="6 6" radius="5" position="-10 0 35"></a-tetrahedron>
       
-      <a-camera position="0 1.6 0"></a-camera>
-    
+      <a-camera position="0 1.6 0">
+        <a-cursor></a-cursor>
+      </a-camera>
     </a-scene>
   </body>
 </html>
