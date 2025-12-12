@@ -27,12 +27,24 @@
         border-radius: 5px;
         z-index: 9998;
       }
+      #instruction {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 28px;
+        color: red;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        z-index: 9998;
+      }
     </style>
   </head>
   <body>
     <div id="aimCircle"></div>
     <div id="score">Score: 0</div>
     <div id="ammo">Ammo: 10</div>
+    <div id="instruction">Press [SPACEBAR] to shoot</div>
     <a-scene>
       <a-assets>
         <img id="spiderskin" src="spiderskin3.jpg" />

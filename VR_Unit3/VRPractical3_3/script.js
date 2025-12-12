@@ -1,18 +1,18 @@
 let rnd = (l,u) => Math.random() * (u-l) + l
 let scene, camera, bullets = [], enemies = [], ammo_boxes = [], ammo_count = 10, enemy_killed = 0;
 let isShooting = false;
-let aimLine;
+let aim;
 
 window.addEventListener("DOMContentLoaded",function() {
   scene = document.querySelector("a-scene");
   camera = document.querySelector("a-camera");
 
-  aimLine = document.createElement("a-line");
-  aimLine.setAttribute("start", "0 0 0");
-  aimLine.setAttribute("end", "0 0 -50");
-  aimLine.setAttribute("color", "red");
-  aimLine.setAttribute("material", "lineWidth: 5");
-  camera.appendChild(aimLine);
+  aim = document.createElement("a-line");
+  aim.setAttribute("start", "0 0 0");
+  aim.setAttribute("end", "0 0 -50");
+  aim.setAttribute("color", "red");
+  aim.setAttribute("material", "lineWidth: 5");
+  camera.appendChild(aim);
 
   spawnSpiders(50);
   spawnAmmo(10);
@@ -51,7 +51,7 @@ function spawnAmmo(count) {
 class AmmoPack {
   constructor() {
     this.obj = document.createElement("a-sphere");
-    this.obj.setAttribute("color", "red");
+    this.obj.setAttribute("color", "yellow");
     this.obj.setAttribute("radius", "0.3");
     this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.5, z: rnd(-70, 70)});
     scene.appendChild(this.obj);
