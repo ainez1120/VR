@@ -151,7 +151,7 @@ function distance(obj1,obj2){
 class Spider {
   constructor() {
     this.obj = document.createElement("a-entity");
-    this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.5, z: rnd(-70, 70)});
+    this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.3, z: rnd(-70, 70)});
     this.obj.setAttribute("rotation", "0 0 0");
     this.obj.setAttribute("scale", "0.4 0.4 0.4");
 

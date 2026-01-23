@@ -11,7 +11,7 @@ class Bullet{
     let direction = new THREE.Vector3(0, 0, -1);
     direction.applyQuaternion(camera.object3D.quaternion);
     
-    let speed = 0.5;
+    let speed = 0.8;
     this.dx = direction.x * speed;
     this.dy = direction.y * speed;
     this.dz = direction.z * speed;
