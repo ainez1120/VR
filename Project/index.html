@@ -4,7 +4,12 @@
     <script src="bullet.js"></script>
     <script src="script.js"></script>
     <script src="kinema.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <script src="demo/license.txt"></script>
+    <script src="demo/scene.bin"></script>
+    <script src="demo/scene.gltf"></script>
+
     <style>
 
       #score {
@@ -49,8 +54,7 @@
     <div id="instruction">Press [SPACEBAR] to shoot</div>
     <a-scene>
       <a-assets>
-        <img id="spiderskin" src="spiderskin3.jpg" />
-        <img id="spidereye" src="spidereye2.jpg"/>
+        <a-asset-item id="demoModel" src="demo/scene.gltf"></a-asset-item>
         <img id="rock" src = "cave2.jpg"/>
       </a-assets>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="150" height="150" color="gray" static-body></a-plane>
@@ -76,10 +80,17 @@
       <a-tetrahedron src="#rock" repeat="6 6" radius="5" position="20 0 10" static-body></a-tetrahedron>
       <a-tetrahedron src="#rock" repeat="6 6" radius="5" position="-10 0 35" static-body></a-tetrahedron>
       
-      <a-camera position="0 1.6 0" id="camera" kinema-body="radius: 0.8">
-      
-        <a-cursor></a-cursor>
-      </a-camera>
+      <a-entity position="0 1 0" kinematic-body="radius: 0.5">
+
+        <a-entity position="0 1 0">
+        <a-camera position="0 2 0" kinematic-body="radius: 1">
+          <a-cursor></a-cursor>
+        </a-camera>
+        </a-entity>
+        
+      </a-entity>
+
+
     </a-scene>
   </body>
 </html>

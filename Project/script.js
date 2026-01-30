@@ -6,6 +6,7 @@ let aim;
 window.addEventListener("DOMContentLoaded",function() {
   scene = document.querySelector("a-scene");
   camera = document.querySelector("a-camera");
+  let cameraEntity = document.querySelector("#cameraEntity");
 
   aim = document.createElement("a-line");
   aim.setAttribute("start", "0 0 0");
@@ -152,118 +153,8 @@ class Spider {
   constructor() {
     this.obj = document.createElement("a-entity");
     this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.3, z: rnd(-70, 70)});
-    this.obj.setAttribute("rotation", "0 0 0");
-    this.obj.setAttribute("scale", "0.4 0.4 0.4");
-
-    let eye1 = document.createElement("a-sphere");
-    eye1.setAttribute("src", "#spidereye");
-    eye1.setAttribute("position", "0.5 0.25 0.85");
-    eye1.setAttribute("radius", "0.175");
-    this.obj.appendChild(eye1);
-    
-    let eye2 = document.createElement("a-sphere");
-    eye2.setAttribute("src", "#spidereye");
-    eye2.setAttribute("position", "0.2 0.25 0.85");
-    eye2.setAttribute("radius", "0.25");
-    this.obj.appendChild(eye2);
-    
-    let eye3 = document.createElement("a-sphere");
-    eye3.setAttribute("src", "#spidereye");
-    eye3.setAttribute("position", "-0.2 0.25 0.85");
-    eye3.setAttribute("radius", "0.25");
-    this.obj.appendChild(eye3);
-    
-    let eye4 = document.createElement("a-sphere");
-    eye4.setAttribute("src", "#spidereye");
-    eye4.setAttribute("position", "-0.5 0.25 0.85");
-    eye4.setAttribute("radius", "0.175");
-    this.obj.appendChild(eye4);
-    
-
-    let body1 = document.createElement("a-entity");
-    body1.setAttribute("position", "0 0 0");
-    
-    let sphere1 = document.createElement("a-sphere");
-    sphere1.setAttribute("src", "#spiderskin");
-    sphere1.setAttribute("position", "0 0 0");
-    body1.appendChild(sphere1);
-    
-    let leg1 = document.createElement("a-cylinder");
-    leg1.setAttribute("src", "#spiderskin");
-    leg1.setAttribute("position", "-1 0.5 0.25");
-    leg1.setAttribute("radius", "0.25");
-    leg1.setAttribute("height", "2");
-    leg1.setAttribute("rotation", "0 0 45");
-    body1.appendChild(leg1);
-    
-    let leg2 = document.createElement("a-cylinder");
-    leg2.setAttribute("src", "#spiderskin");
-    leg2.setAttribute("position", "-2.3 0.3 0.25");
-    leg2.setAttribute("radius", "0.25");
-    leg2.setAttribute("height", "2.5");
-    leg2.setAttribute("rotation", "0 0 -45");
-    body1.appendChild(leg2);
-    
-    let leg3 = document.createElement("a-cylinder");
-    leg3.setAttribute("src", "#spiderskin");
-    leg3.setAttribute("position", "1 0.5 0.25");
-    leg3.setAttribute("radius", "0.25");
-    leg3.setAttribute("height", "2");
-    leg3.setAttribute("rotation", "0 0 -45");
-    body1.appendChild(leg3);
-    
-    let leg4 = document.createElement("a-cylinder");
-    leg4.setAttribute("src", "#spiderskin");
-    leg4.setAttribute("position", "2.3 0.3 0.25");
-    leg4.setAttribute("radius", "0.25");
-    leg4.setAttribute("height", "2.5");
-    leg4.setAttribute("rotation", "0 0 45");
-    body1.appendChild(leg4);
-    
-    this.obj.appendChild(body1);
-    
-
-    let body2 = document.createElement("a-entity");
-    body2.setAttribute("position", "0 0 -1.05");
-    
-    let sphere2 = document.createElement("a-sphere");
-    sphere2.setAttribute("src", "#spiderskin");
-    sphere2.setAttribute("position", "0 0 0");
-    body2.appendChild(sphere2);
-    
-    let leg5 = document.createElement("a-cylinder");
-    leg5.setAttribute("src", "#spiderskin");
-    leg5.setAttribute("position", "-1 0.5 0.25");
-    leg5.setAttribute("radius", "0.25");
-    leg5.setAttribute("height", "2");
-    leg5.setAttribute("rotation", "0 0 45");
-    body2.appendChild(leg5);
-    
-    let leg6 = document.createElement("a-cylinder");
-    leg6.setAttribute("src", "#spiderskin");
-    leg6.setAttribute("position", "-2.3 0.3 0.25");
-    leg6.setAttribute("radius", "0.25");
-    leg6.setAttribute("height", "2.5");
-    leg6.setAttribute("rotation", "0 0 -45");
-    body2.appendChild(leg6);
-    
-    let leg7 = document.createElement("a-cylinder");
-    leg7.setAttribute("src", "#spiderskin");
-    leg7.setAttribute("position", "1 0.5 0.25");
-    leg7.setAttribute("radius", "0.25");
-    leg7.setAttribute("height", "2");
-    leg7.setAttribute("rotation", "0 0 -45");
-    body2.appendChild(leg7);
-    
-    let leg8 = document.createElement("a-cylinder");
-    leg8.setAttribute("src", "#spiderskin");
-    leg8.setAttribute("position", "2.3 0.3 0.25");
-    leg8.setAttribute("radius", "0.25");
-    leg8.setAttribute("height", "2.5");
-    leg8.setAttribute("rotation", "0 0 45");
-    body2.appendChild(leg8);
-    
-    this.obj.appendChild(body2);
+    this.obj.setAttribute("gltf-model", "#demoModel");
+    this.obj.setAttribute("scale", "1 1 1");
     
     scene.appendChild(this.obj);
   }
