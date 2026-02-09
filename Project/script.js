@@ -6,7 +6,7 @@ let aim;
 window.addEventListener("DOMContentLoaded",function() {
   scene = document.querySelector("a-scene");
   camera = document.querySelector("a-camera");
-  let cameraEntity = document.querySelector("#cameraEntity");
+
 
   aim = document.createElement("a-line");
   aim.setAttribute("start", "0 0 0");
@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded",function() {
   aim.setAttribute("material", "lineWidth: 5");
   camera.appendChild(aim);
 
+  spawnRocks();
   spawnSpiders(50);
   spawnAmmo(10);
   
@@ -54,7 +55,8 @@ class AmmoPack {
     this.obj = document.createElement("a-sphere");
     this.obj.setAttribute("color", "yellow");
     this.obj.setAttribute("radius", "0.3");
-    this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.5, z: rnd(-70, 70)});
+    this.obj.setAttribute("static-body", "shape: auto");
+    this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0, z: rnd(-70, 70)});
     scene.appendChild(this.obj);
   }
   
@@ -74,6 +76,28 @@ function updateAmmoDisplay() {
   if(vr) vr.setAttribute('text', 'value: Ammo: ' + ammo_count + '; color: red; align: center; width: 2');
 }
 
+function spawnRocks() {
+  new Rock(-5, 0.25, -5, "dodecahedron", 2);
+  new Rock(5, 0, 10, "dodecahedron", 1);
+  new Rock(2, 0.1, -15, "dodecahedron", 1);
+  new Rock(-3, 0.25, 20, "dodecahedron", 1);
+
+  new Rock(-20, -1, 5, "icosahedron", 10);
+  new Rock(10, 2, -35, "icosahedron", 5);
+  new Rock(-20, -1, 15, "icosahedron", 5);
+  new Rock(15, -1, 5, "icosahedron", 15);
+
+  new Rock(-50, 0, -35, "octahedron", 30);
+  new Rock(50, 0, -25, "octahedron", 15);
+  new Rock(-40, 0, 40, "octahedron", 15);
+  new Rock(20, 0, 35, "octahedron", 20);
+
+  new Rock(0, 0, -10, "tetrahedron", 5);
+  new Rock(-10, 0, -20, "tetrahedron", 5);
+  new Rock(20, 0, 10, "tetrahedron", 5);
+  new Rock(-10, 0, 35, "tetrahedron", 5);
+}
+
 function spawnSpiders(count) {
   for(let i = 0; i < count; i++) {
     enemies.push(new Spider());
@@ -81,6 +105,8 @@ function spawnSpiders(count) {
 }
 
 function loop(){
+  player.update();
+
   let playerPos = camera.object3D.position;
   for(let a = 0; a < ammo_boxes.length; a++) {
     let ammoPos = ammo_boxes[a].obj.object3D.position;
@@ -103,7 +129,7 @@ function loop(){
     
     if(Math.abs(bullet.obj.object3D.position.x) > 150 || 
        Math.abs(bullet.obj.object3D.position.z) > 150 ||
-       bullet.obj.object3D.position.y < -10) {
+       bullet.obj.object3D.position.y < 0) {
       if(bullet.obj.parentElement) {
         bullet.obj.remove();
       }
@@ -113,8 +139,21 @@ function loop(){
     }
 
     for(let i = 0; i < enemies.length; i++) {
-      if(distance(bullet.obj, enemies[i].obj) < 1) {
-        enemies[i].remove();
+      let enemy = enemies[i];
+      let box = new THREE.Box3().setFromObject(enemy.obj.object3D);
+      let sphere = new THREE.Sphere();
+      if (!box.isEmpty()) {
+        box.getBoundingSphere(sphere);
+      } else {
+        sphere.center.copy(enemy.obj.object3D.position);
+        sphere.radius = 1.5;
+      }
+
+      let bp = bullet.obj.object3D.position;
+      let d = sphere.center.distanceTo(bp);
+      let bulletRadius = 0.5;
+      if (d < sphere.radius + bulletRadius) {
+        enemy.remove();
         enemies.splice(i, 1);
         if(bullet.obj.parentElement) {
           bullet.obj.remove();
@@ -154,7 +193,7 @@ class Spider {
     this.obj = document.createElement("a-entity");
     this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.3, z: rnd(-70, 70)});
     this.obj.setAttribute("gltf-model", "#demoModel");
-    this.obj.setAttribute("scale", "1 1 1");
+    this.obj.setAttribute("scale", "1.5 1.5 1.5");
     
     scene.appendChild(this.obj);
   }

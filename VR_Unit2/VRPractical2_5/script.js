@@ -35,6 +35,7 @@ window.addEventListener('DOMContentLoaded', function () {
       this.entity.setAttribute('height', '1');
       this.entity.setAttribute('width', '1');
       this.entity.setAttribute('color', '#7B7B7B');
+      this.entity.setAttribute('static-body', '');
       scene.appendChild(this.entity);
     }
   }

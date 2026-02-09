@@ -1,27 +1,26 @@
 class Bullet{
   constructor(){
     this.obj = document.createElement("a-sphere");
-    this.obj.setAttribute("radius",0.5)
-    this.obj.setAttribute("color", "red")
-    let pos = camera.object3D.position;
-    this.obj.setAttribute("position",{x:pos.x,y:pos.y,z:pos.z});
-    scene.append(this.obj);
-    
+    this.obj.setAttribute("radius", 0.5);
+    this.obj.setAttribute("color", "red");
 
+    // compute spawn position slightly in front of the camera to avoid immediate collisions
+    let camPos = camera.object3D.position.clone();
     let direction = new THREE.Vector3(0, 0, -1);
-    direction.applyQuaternion(camera.object3D.quaternion);
-    
+    direction.applyQuaternion(camera.object3D.quaternion).normalize();
+    let spawnOffset = direction.clone().multiplyScalar(1.2);
+    let startPos = camPos.add(spawnOffset);
+    this.obj.setAttribute("position", {x: startPos.x, y: startPos.y, z: startPos.z});
+    scene.appendChild(this.obj);
+
     let speed = 0.8;
     this.dx = direction.x * speed;
     this.dy = direction.y * speed;
     this.dz = direction.z * speed;
   }
   fire(){
-
     this.obj.object3D.position.x += this.dx;
     this.obj.object3D.position.y += this.dy;
     this.obj.object3D.position.z += this.dz; 
-
-   
   }
 }
