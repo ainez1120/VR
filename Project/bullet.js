@@ -4,7 +4,6 @@ class Bullet{
     this.obj.setAttribute("radius", 0.5);
     this.obj.setAttribute("color", "red");
 
-    // compute spawn position slightly in front of the camera to avoid immediate collisions
     let camPos = camera.object3D.position.clone();
     let direction = new THREE.Vector3(0, 0, -1);
     direction.applyQuaternion(camera.object3D.quaternion).normalize();
@@ -13,7 +12,7 @@ class Bullet{
     this.obj.setAttribute("position", {x: startPos.x, y: startPos.y, z: startPos.z});
     scene.appendChild(this.obj);
 
-    let speed = 0.8;
+    let speed = 10;
     this.dx = direction.x * speed;
     this.dy = direction.y * speed;
     this.dz = direction.z * speed;

@@ -1,11 +1,8 @@
 class Player{
   constructor(selector){
     this.obj = document.querySelector(selector);
-    this.moveStrength = 0.02;
-    this.jumpStrength = 0.12;
-    this.jumping = false;
+    this.moveStrength = 0.2;
     this.pressed = [];
-    this.dy = this.jumpStrength;
 
     this.driver = document.createElement("a-sphere");
     this.driver.setAttribute("opacity",0);
@@ -13,7 +10,7 @@ class Player{
     this.driver.setAttribute("radius",0.5);
 
     this.driver.object3D.position.x = this.obj.object3D.position.x;
-    this.driver.object3D.position.y = this.obj.object3D.position.y;
+    this.driver.object3D.position.y = this.obj.object3D.position.y + 1.5;
     this.driver.object3D.position.z = this.obj.object3D.position.z;
     scene.append(this.driver);
 
@@ -39,19 +36,6 @@ class Player{
   processImpulses(){
     try{
       this.driver.setAttribute("dynamic-body",{mass:20,angularDamping:0.5,linearDamping:0.01});
-      if(this.pressed[" "] && !this.jumping){
-        this.jumping = true;
-      }
-      if(this.jumping){
-        if(this.dy > 0){
-          this.dy -= 0.002;
-          this.driver.object3D.position.y += this.dy;
-          this.driver.components["dynamic-body"].syncToPhysics();
-        }else{
-          this.jumping = false;
-          this.dy = this.jumpStrength;         
-        }
-      }
       
       if(this.pressed["ArrowUp"] || this.pressed["w"] ){
         let theta = this.obj.object3D.rotation.y + Math.PI;
@@ -69,7 +53,7 @@ class Player{
         let theta = this.obj.object3D.rotation.y + Math.PI / 2;
         this.updateDriverPosition(theta);
       }
-      //this.driver.components["dynamic-body"].syncToPhysics();
+
       
     }catch{}
   }

@@ -1,12 +1,12 @@
 let rnd = (l,u) => Math.random() * (u-l) + l
-let scene, camera, bullets = [], enemies = [], ammo_boxes = [], ammo_count = 10, enemy_killed = 0;
+let scene, camera, player, bullets = [], enemies = [], ammo_boxes = [], ammo_count = 10, enemy_killed = 0;
 let isShooting = false;
 let aim;
 
 window.addEventListener("DOMContentLoaded",function() {
   scene = document.querySelector("a-scene");
   camera = document.querySelector("a-camera");
-
+  createPlayer();
 
   aim = document.createElement("a-line");
   aim.setAttribute("start", "0 0 0");
@@ -43,6 +43,10 @@ window.addEventListener("DOMContentLoaded",function() {
   setTimeout(loop,100);
   setTimeout(countdown,100);
 })
+
+function createPlayer() {
+  player = new Player("a-camera");
+}
 
 function spawnAmmo(count) {
   for(let i = 0; i < count; i++) {
@@ -192,6 +196,7 @@ class Spider {
   constructor() {
     this.obj = document.createElement("a-entity");
     this.obj.setAttribute("position", {x: rnd(-70, 70), y: 0.3, z: rnd(-70, 70)});
+    this.obj.setAttribute("rotation", {x: 0, y: rnd(0, 360), z: 0});
     this.obj.setAttribute("gltf-model", "#demoModel");
     this.obj.setAttribute("scale", "1.5 1.5 1.5");
     
