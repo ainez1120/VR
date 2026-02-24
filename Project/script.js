@@ -1,5 +1,5 @@
 let rnd = (l,u) => Math.random() * (u-l) + l
-let scene, camera, player, bullets = [], enemies = [], ammo_boxes = [], ammo_count = 10, enemy_killed = 0;
+let scene, camera, player, bullets = [], enemies = [], ammo_boxes = [], rocks = [], ammo_count = 10, enemy_killed = 0;
 let isShooting = false;
 let aim;
 
@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded",function() {
   camera.appendChild(aim);
 
   spawnRocks();
-  spawnSpiders(50);
+  spawnSpiders(30);
   spawnAmmo(10);
   
   updateAmmoDisplay();

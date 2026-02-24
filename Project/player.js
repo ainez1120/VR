@@ -15,13 +15,9 @@ class Player{
     scene.append(this.driver);
 
     window.addEventListener("keyup",(e)=>{
-      if(this.pressed[" "]) {}else
-        this.driver.removeAttribute("dynamic-body");
       delete this.pressed[e.key];
     });
     window.addEventListener("keydown",(e)=>{
-      if(this.pressed[" "]) {}else
-        this.driver.setAttribute("dynamic-body",{mass:20,angularDamping:0.5,linearDamping:0.01});
       this.pressed[e.key] = true;
     })
   }
@@ -60,8 +56,26 @@ class Player{
   updateDriverPosition(theta){
     let dz = this.moveStrength * Math.cos(theta);
     let dx = this.moveStrength * Math.sin(theta);
-    this.driver.object3D.position.z += dz;
-    this.driver.object3D.position.x += dx;
+    let newZ = this.driver.object3D.position.z + dz;
+    let newX = this.driver.object3D.position.x + dx;
+    let newY = this.driver.object3D.position.y;
+    
+    try {
+      const driverRadius = 0.5;
+      const sphere = new THREE.Sphere(new THREE.Vector3(newX, newY, newZ), driverRadius);
+      if (typeof rocks !== 'undefined') {
+        for (let i = 0; i < rocks.length; i++) {
+          const r = rocks[i];
+          if (!r || !r.obj) continue;
+          const box = new THREE.Box3().setFromObject(r.obj.object3D);
+          if (!box.isEmpty() && box.intersectsSphere(sphere)) {
+            return;
+          }
+        }
+      }
+    } catch(e){}
+    this.driver.object3D.position.z = newZ;
+    this.driver.object3D.position.x = newX;
     this.driver.components["dynamic-body"].syncToPhysics();
   }
 }

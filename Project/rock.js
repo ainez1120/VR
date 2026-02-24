@@ -1,3 +1,4 @@
+
 class Rock {
   constructor(x, y, z, shape = "box", size = 1) {
     this.obj = document.createElement(`a-${shape}`);
@@ -15,5 +16,7 @@ class Rock {
     
     this.obj.setAttribute("position", {x: x, y: y, z: z});
     scene.appendChild(this.obj);
+    if(typeof rocks === 'undefined') rocks = [];
+    rocks.push(this);
   }
 }
