@@ -1,3 +1,4 @@
+
 class Player{
   constructor(selector){
     this.obj = document.querySelector(selector);
@@ -10,7 +11,7 @@ class Player{
     this.driver.setAttribute("radius",0.5);
 
     this.driver.object3D.position.x = this.obj.object3D.position.x;
-    this.driver.object3D.position.y = this.obj.object3D.position.y + 1.5;
+    this.driver.object3D.position.y = this.obj.object3D.position.y + 2.0;
     this.driver.object3D.position.z = this.obj.object3D.position.z;
     scene.append(this.driver);
 
@@ -30,6 +31,7 @@ class Player{
     
   }
   processImpulses(){
+    if(gameOver) return;
     try{
       this.driver.setAttribute("dynamic-body",{mass:20,angularDamping:0.5,linearDamping:0.01});
       
@@ -61,15 +63,17 @@ class Player{
     let newY = this.driver.object3D.position.y;
     
     try {
-      const driverRadius = 0.5;
-      const sphere = new THREE.Sphere(new THREE.Vector3(newX, newY, newZ), driverRadius);
-      if (typeof rocks !== 'undefined') {
-        for (let i = 0; i < rocks.length; i++) {
-          const r = rocks[i];
-          if (!r || !r.obj) continue;
-          const box = new THREE.Box3().setFromObject(r.obj.object3D);
-          if (!box.isEmpty() && box.intersectsSphere(sphere)) {
-            return;
+      if (!(window.playerCollisionDisabledUntil && Date.now() < window.playerCollisionDisabledUntil)){
+        const driverRadius = 0.5;
+        const sphere = new THREE.Sphere(new THREE.Vector3(newX, newY, newZ), driverRadius);
+        if (typeof rocks !== 'undefined') {
+          for (let i = 0; i < rocks.length; i++) {
+            const r = rocks[i];
+            if (!r || !r.obj) continue;
+            const box = new THREE.Box3().setFromObject(r.obj.object3D);
+            if (!box.isEmpty() && box.intersectsSphere(sphere)) {
+              return;
+            }
           }
         }
       }

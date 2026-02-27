@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
@@ -18,34 +19,64 @@
         position: fixed;
         top: 20px;
         left: 20px;
-        font-size: 32px;
+        font-size: 28px;
         color: red;
         font-family: Arial, sans-serif;
         font-weight: bold;
         border-radius: 5px;
         z-index: 9998;
+        line-height: 1.2;
       }
       #ammo {
         position: fixed;
-        top: 70px;
+        top: 55px;
         left: 20px;
-        font-size: 32px;
-        color: red;
+        font-size: 28px;
+        color: #ffd24d;
         font-family: Arial, sans-serif;
-        font-weight: bold;
-        border-radius: 5px;
+        font-weight: 900;
+        border-radius: 6px;
         z-index: 9998;
+        text-shadow: 0 0 8px rgba(255,210,77,0.9);
+        background: rgba(10,10,10,0.35);
+        padding: 6px 10px;
       }
       #instruction {
         position: fixed;
         top: 20px;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 28px;
+        font-size: 40px;
         color: red;
         font-family: Arial, sans-serif;
         font-weight: bold;
         z-index: 9998;
+      }
+      #hp {
+        position: fixed;
+        top: 120px;
+        left: 20px;
+        width: 200px;
+        height: 28px;
+        background: #222;
+        border-radius: 6px;
+        padding: 3px;
+        z-index: 9999;
+      }
+      #hpbar {
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg,#0f8,#3f3);
+        border-radius: 4px;
+        transition: width 0.25s linear;
+      }
+      #hptext {
+        position: absolute;
+        top: 4px;
+        left: 8px;
+        font-size: 16px;
+        color: #001;
+        font-weight: bold;
       }
     </style>
   </head>
@@ -53,6 +84,7 @@
     <div id="aimCircle"></div>
     <div id="score">Score: 0</div>
     <div id="ammo">Ammo: 10</div>
+    <div id="hp"><div id="hpbar"></div><div id="hptext">HP: 100</div></div>
     <div id="instruction">Press [SPACEBAR] to shoot</div>
     <a-scene physics="driver: cannon; gravity: 0 -9.8 0; iterations: 20">
       <a-assets>
@@ -60,9 +92,11 @@
         <img id="rock" src = "cave2.jpg"/>
       </a-assets>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="150" height="150" color="gray" static-body></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <a-sky color="#071029"></a-sky>
+      <a-entity light="type: ambient; color: #3b475a; intensity: 0.85"></a-entity>
+      <a-entity light="type: directional; color: #9bbcff; intensity: 0.65" position="-1 2 -0.5"></a-entity>
       
-      <a-camera position="0 2 0">
+      <a-camera position="0 3 0">
         <a-cursor></a-cursor>
       </a-camera>
 
