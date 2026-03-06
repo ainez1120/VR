@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded",function() {
   aim = document.createElement("a-line");
   aim.setAttribute("start", "0 0 0");
   aim.setAttribute("end", "0 0 -50");
-  aim.setAttribute("color", "red");
+  aim.setAttribute("color", "#f5f8fc");
   aim.setAttribute("material", "lineWidth: 5");
   camera.appendChild(aim);
 
@@ -252,7 +252,6 @@ function createBoundaryWalls(){
 
     makeWall({x: -edge, y: height/2, z: 0}, {x: thickness, y: height, z: edge*2});
     makeWall({x: edge, y: height/2, z: 0}, {x: thickness, y: height, z: edge*2});
-    // front and back
     makeWall({x: 0, y: height/2, z: -edge}, {x: edge*2, y: height, z: thickness});
     makeWall({x: 0, y: height/2, z: edge}, {x: edge*2, y: height, z: thickness});
   }catch(e){console.warn(e)}
@@ -271,7 +270,7 @@ function loop(){
   if (playerHP <= 0) {
     gameOver = true;
     document.getElementById('instruction').innerText = 'You Died - Refresh to try again';
-    return; // stop updates
+    return;
   }
 
   for (let ei = 0; ei < enemies.length; ei++) {
