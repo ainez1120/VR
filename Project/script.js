@@ -186,9 +186,8 @@ function spawnRocks() {
       const p = r.obj.object3D.position;
       const dist = Math.sqrt(p.x*p.x + p.y*p.y + p.z*p.z);
       if(dist < clearRadius) {
-        // randomly keep some rocks so player still has obstacles
         if(Math.random() < keepChance) {
-          continue; // keep this rock
+          continue; 
         }
         try{ r.obj.remove(); }catch(e){}
         rocks.splice(i, 1);

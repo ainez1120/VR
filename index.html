@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.27);
+            max-width: 400px;
+        }
+        
+        .card h2 {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .card p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        
+        .card a {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .card a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🎮 VR Game</h1>
+            <p class="subtitle">An interactive VR adventure</p>
+            <p>Jump into an exciting VR experience built with A-Frame!</p>
+            <a href="Project/start.html">Start</a>
+        </div>
+    </div>
+</body>
+</html>
