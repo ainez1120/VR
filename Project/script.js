@@ -2,6 +2,7 @@ let rnd = (l,u) => Math.random() * (u-l) + l
 let scene, camera, player, bullets = [], enemies = [], ammo_boxes = [], rocks = [], ammo_count = 10, enemy_killed = 0;
 let isShooting = false;
 let gameOver = false;
+let WIN_KILLS = 20;
 let aim;
 let playerHP = 100;
 let maxHP = 100;
@@ -30,6 +31,7 @@ window.addEventListener("DOMContentLoaded",function() {
   createSkyObjects();
 
   window.addEventListener("keydown", function(e) {
+    if(gameOver) return;
     if(e.key == " ") {
       e.preventDefault();
       if(ammo_count > 0) {
@@ -80,7 +82,11 @@ class AmmoPack {
 }
 
 function updateScore() {
-  document.getElementById("score").innerText = "Score: " + enemy_killed;
+  document.getElementById("score").innerText = "Score: " + enemy_killed + " / " + WIN_KILLS;
+  if (enemy_killed >= WIN_KILLS && !gameOver) {
+    gameOver = true;
+    document.getElementById('instruction').innerText = 'YOU WIN! You defeated ' + WIN_KILLS + ' monsters.';
+  }
 }
 
 function updateAmmoDisplay() {
@@ -263,6 +269,10 @@ function spawnSpiders(count) {
 }
 
 function loop(){
+  if (gameOver) {
+    return;
+  }
+
   player.update();
 
   let playerPos = camera.object3D.position;
@@ -414,7 +424,7 @@ function loop(){
         ammo_boxes[a].obj.remove();
       }
       ammo_boxes.splice(a, 1);
-      ammo_count += 5;
+      ammo_count += 10;
         updateAmmoDisplay();
       a--;
     }
